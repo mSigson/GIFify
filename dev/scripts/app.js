@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { 
+	BrowserRouter as Router, 
+	Route, Link, NavLink, Redirect, BrowserHistory } from 'react-router-dom';
 
-import SearchGIFs from '../scripts/components/SearchGIFs';
-import TrendingGIFs from '../scripts/components/TrendingGIFs';
+import Home from '../scripts/components/Home';
+import Results from '../scripts/components/Results';
 
-class App extends React.Component {
+class App extends React.Component {    
     render() {
       return (
-        <div className="wrapper">
-			<h1>GIFify</h1>
-            <SearchGIFs />
-            <TrendingGIFs />
-        </div>
+        <Router history={BrowserHistory}>
+          <div className="wrapper">
+			        <header>
+                <h1>GIFify</h1>
+              </header>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/results" component={Results} />
+          </div>
+        </Router>
       )
     }
 }
