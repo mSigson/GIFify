@@ -5,7 +5,7 @@ import {
 	Route, Link, NavLink, Redirect, BrowserHistory } from 'react-router-dom';
 
 import Home from '../scripts/components/Home';
-import Results from '../scripts/components/Results';
+import ResultsPage from '../scripts/components/ResultsPage';
 
 class App extends React.Component {    
     render() {
@@ -16,7 +16,7 @@ class App extends React.Component {
                 <h1>GIFify</h1>
               </header>
               <Route exact path="/" component={Home} />
-              <Route exact path="/results" component={Results} />
+              <Route exact path="/results" component={ResultsPage} />
           </div>
         </Router>
       )

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import SearchForm from '../components/SearchForm';
 import GIFResults from '../components/GIFResults';
 
-class Results extends React.Component {
+class ResultsPage extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -42,10 +42,10 @@ class Results extends React.Component {
     }
 }
 
-Results.contextTypes = {
+ResultsPage.contextTypes = {
     router: React.PropTypes.shape({
       history: React.PropTypes.object.isRequired,
     }),
   };
 
-export default Results;
+export default ResultsPage;
