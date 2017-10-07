@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import DisplayGIFs from '../components/DisplayGIFs';
 import MoreInfo from '../components/MoreInfo';
 
 class TrendingGIFs extends Component {
@@ -7,12 +8,12 @@ class TrendingGIFs extends Component {
         super();
         this.state = {
             apikey: `PJkH4zdW92Rb3d981TZsvHKBUTbFJZrL`,
-            trendingGIFs: [],
+            searchedGIFs: [],
             limit: 10,
             paginate: 0,
             rating: "g",
             showMoreInfo: false,
-            chosenGifSrc: '',
+            chosenGifSrc: ''
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -23,15 +24,15 @@ class TrendingGIFs extends Component {
         this.fetchData();
     }
     fetchData() {
-        let trendingGIFsArray = [];
+        let  searchedGIFsArray = [];
         fetch(`http://api.giphy.com/v1/gifs/trending?rating=${this.state.rating}&offset=${this.state.paginate}&api_key=${this.state.apikey}&limit=${this.state.limit}`)
         .then(response => response.json())
         .then(json => {
             json.data.map((item, i) => {
-                trendingGIFsArray.push(item)
+                searchedGIFsArray.push(item)
         })
             this.setState({ 
-                trendingGIFs: trendingGIFsArray
+                searchedGIFs: searchedGIFsArray
             });
         });
     }
@@ -62,17 +63,11 @@ class TrendingGIFs extends Component {
                 <div className="GIFsContainer">
               
                     <button onClick={this.fetchNextPage}>Next Page</button>
-                    {this.state.trendingGIFs.map((item, i) => {
-                        return (
-                            <div key={item.id} className="GIF" 
-                            onClick={() => this.handleClick(event, item.images.fixed_height.url, 
-                            item.url,
-                            item.embed_url
-                            )}>
-                                <img src={`${item.images.fixed_height.url}`} />
-                            </div>
-                        )
-                    })}
+                    <DisplayGIFs
+                 
+                        searchedGIFs={this.state.searchedGIFs}
+                        handleClick = {this.handleClick}
+                    />
                     {this.state.showMoreInfo ? 
                         <MoreInfo 
                             chosenGifSrc={this.state.chosenGifSrc} 

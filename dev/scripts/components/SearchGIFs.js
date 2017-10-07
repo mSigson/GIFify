@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchForm from '../components/SearchForm';
-import GIFResults from '../components/GIFResults';
-import Error from '../components/Error'
+import DisplayGIFs from '../components/DisplayGIFs';
+import Error from '../components/Error';
+import MoreInfo from '../components/MoreInfo';
 
-class ResultsPage extends React.Component {
+class SearchGIFs extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -16,17 +17,20 @@ class ResultsPage extends React.Component {
             limit: 10,
             paginate: 0,
             rating: "g",
-            showError: false
+            showError: false,
+            showMoreInfo: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.fetchNextPage = this.fetchNextPage.bind(this);
+        this.hideMoreInfo = this.hideMoreInfo.bind(this);
     }
     componentDidMount() {
-        this.fetchSearchedGIFs();
+        this.fetchData();
     }
-    fetchSearchedGIFs(){
+    fetchData(){
         let searchedGIFsArray = [];
 
         if(this.state.keywords === ''){
@@ -56,7 +60,7 @@ class ResultsPage extends React.Component {
     fetchNextPage() {
         this.setState({
         paginate: this.state.paginate + this.state.limit
-        }, () => this.fetchSearchedGIFs());
+        }, () => this.fetchData());
     }
     handleChange(event) {
 		this.setState({
@@ -65,31 +69,56 @@ class ResultsPage extends React.Component {
 	}
     handleSubmit(event){
         event.preventDefault();
-        this.fetchSearchedGIFs();
-
+        this.fetchData();
+    }
+    handleClick(event, src, giphyUrl, embedUrl){
+        event.preventDefault();
+        this.setState({
+            showMoreInfo: true,
+            chosenGifSrc: src,
+            chosenGifGiphyUrl: giphyUrl,
+            chosenGifEmbedUrl: embedUrl
+         })
+     }
+    hideMoreInfo(){
+         this.setState({
+             showMoreInfo: false
+          })
     }
     render() {
       return (
         <div className="wrapper">
             <SearchForm 
-            handleChange={this.handleChange} 
-			handleSubmit={this.handleSubmit} 
-			keywords={this.state.keywords}
+                handleChange={this.handleChange} 
+			    handleSubmit={this.handleSubmit} 
+			    keywords={this.state.keywords}
             />
             {this.state.searchedGIFs.length === 0 ? <Error /> : null}
-            <button className = "nextPage" onClick={this.fetchNextPage}>Next Page</button>
-            <GIFResults 
-            searchedGIFs={this.state.searchedGIFs}
+            {this.state.searchedGIFs.length !== 0 ?  
+                <button className = "nextPage" onClick={this.fetchNextPage}>Next Page</button> 
+            : null}
+            <DisplayGIFs 
+                searchedGIFs={this.state.searchedGIFs}
+                handleClick = {this.handleClick}
             />
+            {this.state.showMoreInfo ? 
+                <MoreInfo 
+                    chosenGifSrc={this.state.chosenGifSrc} 
+                    chosenGifGiphyUrl={this.state.chosenGifGiphyUrl}
+                    chosenGifEmbedUrl={this.state.chosenGifEmbedUrl}
+                    hideMoreInfo={this.hideMoreInfo}
+                    handleClick = {this.handleClick}
+                /> 
+            : null}
         </div>
       )
     }
 }
 
-ResultsPage.contextTypes = {
+SearchGIFs.contextTypes = {
     router: React.PropTypes.shape({
       history: React.PropTypes.object.isRequired,
     }),
   };
 
-export default ResultsPage;
+export default SearchGIFs;

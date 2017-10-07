@@ -16,11 +16,10 @@ class Home extends React.Component {
     }
     handleSubmit(event){
         event.preventDefault();
-
         const grabKeywords = this.state.keywords
         localStorage.setItem("keywords", grabKeywords);
 
-        this.context.router.history.push('/results');
+        this.context.router.history.push('/search');
     }
     handleChange(event) {
 		this.setState({
