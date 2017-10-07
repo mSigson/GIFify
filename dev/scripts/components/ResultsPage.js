@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import SearchForm from '../components/SearchForm';
 import GIFResults from '../components/GIFResults';
+import Error from '../components/Error'
 
 class ResultsPage extends React.Component {
     constructor(){
@@ -14,11 +15,13 @@ class ResultsPage extends React.Component {
             searchedGIFs: [],
             limit: 10,
             paginate: 0,
-            rating: "g"
+            rating: "g",
+            showError: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.fetchNextPage = this.fetchNextPage.bind(this);
     }
     componentDidMount() {
         this.fetchSearchedGIFs();
@@ -26,16 +29,34 @@ class ResultsPage extends React.Component {
     fetchSearchedGIFs(){
         let searchedGIFsArray = [];
 
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.chosenKeywords}&offset=${this.state.paginate}&api_key=${this.state.apikey}&limit=${this.state.limit}&rating=${this.state.rating}`)
-        .then(response => response.json())
-        .then(json => {
-            json.data.map((item, i) => {
-                searchedGIFsArray.push(item)
-        })
-            this.setState({ 
-                searchedGIFs: searchedGIFsArray
+        if(this.state.keywords === ''){
+            fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.chosenKeywords}&offset=${this.state.paginate}&api_key=${this.state.apikey}&limit=${this.state.limit}&rating=${this.state.rating}`)
+            .then(response => response.json())
+            .then(json => {
+                json.data.map((item, i) => {
+                    searchedGIFsArray.push(item)
+            })
+                this.setState({ 
+                    searchedGIFs: searchedGIFsArray
+                });
             });
-        });
+        } else {
+            fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.keywords}&offset=${this.state.paginate}&api_key=${this.state.apikey}&limit=${this.state.limit}&rating=${this.state.rating}`)
+            .then(response => response.json())
+            .then(json => {
+                json.data.map((item, i) => {
+                    searchedGIFsArray.push(item)
+            })
+                this.setState({ 
+                    searchedGIFs: searchedGIFsArray
+                });
+            });
+        }
+    }
+    fetchNextPage() {
+        this.setState({
+        paginate: this.state.paginate + this.state.limit
+        }, () => this.fetchSearchedGIFs());
     }
     handleChange(event) {
 		this.setState({
@@ -44,27 +65,8 @@ class ResultsPage extends React.Component {
 	}
     handleSubmit(event){
         event.preventDefault();
+        this.fetchSearchedGIFs();
 
-        const grabKeywords = this.state.keywords
-        localStorage.setItem("keywords", grabKeywords);
-
-        this.updateResults();
-
-    }
-    updateResults(){
-
-        let searchedGIFsArray = [];
-
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.keywords}&offset=${this.state.paginate}&api_key=${this.state.apikey}&limit=${this.state.limit}&rating=${this.state.rating}`)
-        .then(response => response.json())
-        .then(json => {
-            json.data.map((item, i) => {
-                searchedGIFsArray.push(item)
-        })
-            this.setState({ 
-                searchedGIFs: searchedGIFsArray
-            });
-        });
     }
     render() {
       return (
@@ -74,9 +76,9 @@ class ResultsPage extends React.Component {
 			handleSubmit={this.handleSubmit} 
 			keywords={this.state.keywords}
             />
+            {this.state.searchedGIFs.length === 0 ? <Error /> : null}
+            <button className = "nextPage" onClick={this.fetchNextPage}>Next Page</button>
             <GIFResults 
-            fetchSearchedGIFs={this.fetchSearchedGIFs}
-            updateResults={this.updateResults}
             searchedGIFs={this.state.searchedGIFs}
             />
         </div>

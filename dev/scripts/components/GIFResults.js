@@ -5,9 +5,7 @@ class GIFResults extends React.Component {
         return (
             <div className="Results">
                 <div className="wrapper">
-                    <h2>Searched GIFs</h2>
                     <div className="searchedGIFsContainer">
-                        <button onClick={this.fetchNextPage}>Next Page</button>
                         {this.props.searchedGIFs.map((item, i) => {
                             return (
                                 <div className="searchedGIF" key={item.id}>
