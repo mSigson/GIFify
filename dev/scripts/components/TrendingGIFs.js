@@ -18,6 +18,7 @@ class TrendingGIFs extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.fetchNextPage = this.fetchNextPage.bind(this);
+        this.fetchPrevPage = this.fetchPrevPage.bind(this);
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
     }
     componentDidMount() {
@@ -41,6 +42,11 @@ class TrendingGIFs extends Component {
           paginate: this.state.paginate + this.state.limit
         }, () => this.fetchData());
     }
+    fetchPrevPage() {
+        this.setState({
+          paginate: this.state.paginate - this.state.limit
+        }, () => this.fetchData());
+    }
     handleClick(event, src, giphyUrl, embedUrl){
        event.preventDefault();
 
@@ -58,26 +64,33 @@ class TrendingGIFs extends Component {
     }
     render(){
         return (
-            <div className="wrapper">
+            <section className="trending">
                 <h2>Trending GIFs</h2>
-                <div className="GIFsContainer">
-              
-                    <button onClick={this.fetchNextPage}>Next Page</button>
-                    <DisplayGIFs
-                 
-                        searchedGIFs={this.state.searchedGIFs}
-                        handleClick = {this.handleClick}
-                    />
-                    {this.state.showMoreInfo ? 
-                        <MoreInfo 
-                            chosenGifSrc={this.state.chosenGifSrc} 
-                            chosenGifGiphyUrl={this.state.chosenGifGiphyUrl}
-                            chosenGifEmbedUrl={this.state.chosenGifEmbedUrl}
-                            hideMoreInfo={this.hideMoreInfo}
-                        /> 
+                <div className="pageButtons">
+                    {this.state.paginate !== 0 ?  
+                        <button className = "prevPage" onClick={this.fetchPrevPage}>
+                            <i className="fa fa-angle-left" aria-hidden="true"></i>
+                        </button>  
+                    : null}
+                    {this.state.searchedGIFs.length === 10 ?  
+                        <button className = "nextPage" onClick={this.fetchNextPage}>
+                            <i className="fa fa-angle-right" aria-hidden="true"></i>
+                        </button> 
                     : null}
                 </div>
-            </div>
+                <DisplayGIFs
+                    searchedGIFs={this.state.searchedGIFs}
+                    handleClick = {this.handleClick}
+                />
+                {this.state.showMoreInfo ? 
+                    <MoreInfo 
+                        chosenGifSrc={this.state.chosenGifSrc} 
+                        chosenGifGiphyUrl={this.state.chosenGifGiphyUrl}
+                        chosenGifEmbedUrl={this.state.chosenGifEmbedUrl}
+                        hideMoreInfo={this.hideMoreInfo}
+                    /> 
+                : null}
+            </section>
         )
     }
 }

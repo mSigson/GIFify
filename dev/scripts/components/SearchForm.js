@@ -3,13 +3,15 @@ import React, {Component} from 'react';
 class SearchForm extends React.Component {
     render() {
         return(
-            <div className="wrapper">
-                <h2>Search</h2>
+            <section className="searchForm">
                 <form onSubmit={this.props.handleSubmit}>
                     <label htmlFor="keywords">Keyword</label>
                     <input type="text" name="keywords" id="keywords" onChange={this.props.handleChange} />
+                    <button type="submit" name="search" id="search" onClick={this.props.handleSubmit}>
+                        <i className="fa fa-search" aria-hidden="true"></i>
+                    </button>
                 </form>
-            </div>
+            </section>
         )
     }
 }

@@ -25,6 +25,7 @@ class SearchGIFs extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.fetchNextPage = this.fetchNextPage.bind(this);
+        this.fetchPrevPage = this.fetchNextPage.bind(this);
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
     }
     componentDidMount() {
@@ -62,6 +63,11 @@ class SearchGIFs extends React.Component {
         paginate: this.state.paginate + this.state.limit
         }, () => this.fetchData());
     }
+    fetchPrevPage() {
+        this.setState({
+          paginate: this.state.paginate - this.state.limit
+        }, () => this.fetchData());
+    }
     handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -94,9 +100,18 @@ class SearchGIFs extends React.Component {
 			    keywords={this.state.keywords}
             />
             {this.state.searchedGIFs.length === 0 ? <Error /> : null}
-            {this.state.searchedGIFs.length !== 0 ?  
-                <button className = "nextPage" onClick={this.fetchNextPage}>Next Page</button> 
-            : null}
+            <div className="pageButtons">
+                {this.state.paginate !== 0 ?  
+                    <button className = "prevPage" onClick={this.fetchPrevPage}>
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
+                    </button>  
+                : null}
+                {this.state.searchedGIFs.length === 10 ?  
+                    <button className = "nextPage" onClick={this.fetchNextPage}>
+                        <i className="fa fa-angle-right" aria-hidden="true"></i>
+                    </button> 
+                : null}
+            </div>
             <DisplayGIFs 
                 searchedGIFs={this.state.searchedGIFs}
                 handleClick = {this.handleClick}

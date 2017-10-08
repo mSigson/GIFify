@@ -1,0 +1,42 @@
+#moreInfo {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(74, 150, 173, 0.6);
+    color: $primaryBrandColor;
+}
+
+.moreInfoContainer{
+    background: $thirdBrandColor;
+    padding: 20px;
+}
+
+.Icon {
+    display: flex;
+    align-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.Icon i {
+    position: relative;
+    left: 97%;
+    font-size: 20px;
+}
+
+.titleAndIcon h1 {
+    margin: 0;
+}
+
+.chosenGIFconatiner {
+    display: flex;
+    justify-content: center;
+}
+
+.info{
+    text-align: center;
+}

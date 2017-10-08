@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 class MoreInfo  extends Component {
     constructor(){
         super();
@@ -10,16 +9,21 @@ class MoreInfo  extends Component {
     }
     render(){
         return (
-            <div className="moreInfo">
-                <h1>More Info</h1>
-                <div className="chosenGIF">
-                    <i onClick={this.props.hideMoreInfo} className="fa fa-times"></i>
-                    <img src={`${this.props.chosenGifSrc}`} />
-                    <div className="info">
-                        <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
+            <section id="moreInfo">
+                <div className="moreInfoContainer">
+                    <div className="Icon">
+                        <i onClick={this.props.hideMoreInfo} className="fa fa-times"></i>
+                    </div>
+                    <div className="chosenGIF">
+                        <div className="chosenGIFconatiner">
+                            <img src={`${this.props.chosenGifSrc}`} />
+                        </div>
+                        <div className="info">
+                            <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         )
     }
 }

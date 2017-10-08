@@ -1,0 +1,31 @@
+header {
+  background: $primaryBrandColor;
+  color: $thirdBrandColor;
+}
+
+header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.user {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  width: 30%;
+}
+
+.user-profile {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.user-profile img {
+  border-radius: 50%;
+  max-width: 100px;
+}

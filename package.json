@@ -26,5 +26,8 @@
     "react-router-dom": "^4.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "firebase": "^4.5.0"
   }
 }
