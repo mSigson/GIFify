@@ -72,7 +72,6 @@ class App extends React.Component {
               </div>
             </header>
             <Route exact path="/" component={Home} />
-            <Route exact path="/search" component={SearchGIFs} />
             <Route exact path="/savedgifs" component={SavedGIFs} />
           </div>
         </Router>
