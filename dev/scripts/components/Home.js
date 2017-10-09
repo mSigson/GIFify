@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
+import SearchedGIFs from '../components/SearchedGIFs';
 
 import { trendingAPIcall } from '../utils/http';
 
@@ -10,7 +11,7 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            searchedGIFs: [],
+            keywords: "",
             limit: 10,
             paginate: 0,
             rating: "g",
@@ -22,26 +23,6 @@ class Home extends React.Component {
         this.fetchNextPage = this.fetchNextPage.bind(this);
         this.fetchPrevPage = this.fetchPrevPage.bind(this);
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
-    }
-    componentDidMount() {
-        this.fetchData();
-    }
-    fetchData() {
-        const { rating, paginate, limit } = this.state;
-
-        // set statue of loading to true
-
-        let  searchedGIFsArray = [];
-        trendingAPIcall(rating, paginate, limit)
-        .then(json => {
-            json.data.map((item, i) => {
-                searchedGIFsArray.push(item)
-        })
-            this.setState({ 
-                searchedGIFs: searchedGIFsArray
-                // change state of loading to false 
-            });
-        });
     }
     fetchNextPage() {
         this.setState({
@@ -77,10 +58,20 @@ class Home extends React.Component {
 			keywords={this.state.keywords}
             />
             <TrendingGIFs 
+                keywords = {this.state.keywords}
+                rating = {this.state.rating}
+                limit = {this.state.limit}
                 paginate = {this.state.paginate}
-                searchedGIFs = {this.state.searchedGIFs}
                 fetchPrevPage = {this.fetchPrevPage}
                 fetchNextPage = {this.fetchNextPage}
+                handleClick = {this.handleClick}
+            />
+            <SearchedGIFs 
+                keywords = {this.state.keywords}
+                rating = {this.state.rating}
+                limit = {this.state.limit}
+                paginate = {this.state.paginate}
+                handleClick = {this.handleClick}
             />
             {this.state.showMoreInfo ? 
                 <MoreInfo 
