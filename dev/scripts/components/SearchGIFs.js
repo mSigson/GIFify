@@ -6,6 +6,8 @@ import DisplayGIFs from '../components/DisplayGIFs';
 import Error from '../components/Error';
 import MoreInfo from '../components/MoreInfo';
 
+export const apiCall = (params) => fetch('api')
+
 class SearchGIFs extends React.Component {
     constructor(){
         super();

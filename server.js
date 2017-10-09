@@ -1,6 +1,5 @@
 const express = require('express');
 
-// returns object with methods we can work with
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');

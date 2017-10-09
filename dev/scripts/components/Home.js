@@ -4,28 +4,70 @@ import ReactDOM from 'react-dom';
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
 
+import { trendingAPIcall } from '../utils/http';
+
 class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            keywords: ''
-        }
+            searchedGIFs: [],
+            limit: 10,
+            paginate: 0,
+            rating: "g",
+            showMoreInfo: false,
+            chosenGifSrc: ''
+        };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.fetchNextPage = this.fetchNextPage.bind(this);
+        this.fetchPrevPage = this.fetchPrevPage.bind(this);
+        this.hideMoreInfo = this.hideMoreInfo.bind(this);
     }
-    handleSubmit(event){
-        event.preventDefault();
-        const grabKeywords = this.state.keywords
-        localStorage.setItem("keywords", grabKeywords);
+    componentDidMount() {
+        this.fetchData();
+    }
+    fetchData() {
+        const { rating, paginate, limit } = this.state;
 
-        this.context.router.history.push('/search');
+        // set statue of loading to true
+
+        let  searchedGIFsArray = [];
+        trendingAPIcall(rating, paginate, limit)
+        .then(json => {
+            json.data.map((item, i) => {
+                searchedGIFsArray.push(item)
+        })
+            this.setState({ 
+                searchedGIFs: searchedGIFsArray
+                // change state of loading to false 
+            });
+        });
     }
-    handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
-	}
+    fetchNextPage() {
+        this.setState({
+          paginate: this.state.paginate + this.state.limit
+        }, () => this.fetchData());
+    }
+    fetchPrevPage() {
+        this.setState({
+          paginate: this.state.paginate - this.state.limit
+        }, () => this.fetchData());
+    }
+    handleClick(event, src, giphyUrl, embedUrl){
+       event.preventDefault();
+
+       this.setState({
+           showMoreInfo: true,
+           chosenGifSrc: src,
+           chosenGifGiphyUrl: giphyUrl,
+           chosenGifEmbedUrl: embedUrl
+        })
+    }
+    hideMoreInfo(){
+        this.setState({
+            showMoreInfo: false
+         })
+    }
     render() {
       return (
         <div className="wrapper">
@@ -34,7 +76,20 @@ class Home extends React.Component {
 			handleSubmit={this.handleSubmit} 
 			keywords={this.state.keywords}
             />
-            <TrendingGIFs />
+            <TrendingGIFs 
+                paginate = {this.state.paginate}
+                searchedGIFs = {this.state.searchedGIFs}
+                fetchPrevPage = {this.fetchPrevPage}
+                fetchNextPage = {this.fetchNextPage}
+            />
+            {this.state.showMoreInfo ? 
+                <MoreInfo 
+                    chosenGifSrc={this.state.chosenGifSrc} 
+                    chosenGifGiphyUrl={this.state.chosenGifGiphyUrl}
+                    chosenGifEmbedUrl={this.state.chosenGifEmbedUrl}
+                    hideMoreInfo={this.hideMoreInfo}
+                /> 
+            : null}
         </div>
       )
     }

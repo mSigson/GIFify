@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const RankedGif = require('../models/RankedGIFs');
-const utils = require('../utils');
+const utils = require('../dev/scripts/utils');
 
 router.route('/')
 .get((req, res) => {
