@@ -52,25 +52,33 @@ class SearchedGIFs extends React.Component {
     render(){
         return (
             <section className="trending">
-                <div className="pageButtons">
-                    {this.props.paginate !== 0 ?  
-                        <button className = "prevPage" onClick={this.props.fetchPrevPage}>
-                            <i className="fa fa-angle-left" aria-hidden="true"></i>
-                        </button>  
-                    : null}
-                    {this.state.GIFs.length === 10 ?  
-                        <button className = "nextPage" onClick={this.props.fetchNextPage}>
-                            <i className="fa fa-angle-right" aria-hidden="true"></i>
-                        </button> 
+                <div className="wrapper">
+                    <div className="pageButtonContainer">
+                            {this.props.paginate !== 0 ?  
+                                <div className="pageButton">
+                                    <label htmlFor="prevPage">Prev Page</label>
+                                    <button className = "prevPage" name = "prevPage" onClick={this.props.fetchPrevPage}>
+                                        <i className="fa fa-angle-left" aria-hidden="true"></i>
+                                    </button>  
+                                </div>
+                            : null}
+                            {this.state.GIFs.length === 10 ?  
+                                <div className = "pageButton">
+                                    <button className = "nextPage" name = "nextPage" onClick={this.props.fetchNextPage}>
+                                        <i className="fa fa-angle-right" aria-hidden="true"></i>
+                                    </button> 
+                                    <label htmlFor="nextPage">Next Page</label>
+                                </div>
+                            : null}
+                        </div>
+                    <DisplayGIFs
+                        GIFs={this.state.GIFs}
+                        handleClick = {this.props.handleClick}
+                    />
+                    {this.state.GIFs.length === 0 ? 
+                        <Error />
                     : null}
                 </div>
-                <DisplayGIFs
-                    GIFs={this.state.GIFs}
-                    handleClick = {this.props.handleClick}
-                />
-                {this.state.GIFs.length === 0 ? 
-                    <Error />
-                : null}
             </section>
         )
     }

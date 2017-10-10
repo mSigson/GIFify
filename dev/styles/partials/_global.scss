@@ -44,8 +44,9 @@ html {
     display: flex;
     justify-content: center;
     &:hover {
-       
-    }
+       background: $primaryBrandColor;
+       border: 1px solid $secondaryBrandColor;
+    } 
 }
 .pageButton button i {
     font-size: 30px;

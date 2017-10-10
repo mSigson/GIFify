@@ -170,6 +170,9 @@ html {
   padding: 2px 10%;
   display: flex;
   justify-content: center; }
+  .pageButton button:hover {
+    background: #7D1935;
+    border: 1px solid #4A96AD; }
 
 .pageButton button i {
   font-size: 30px;
@@ -194,6 +197,9 @@ nav {
   margin-bottom: 10px;
   box-shadow: 2px 2px 5px #888888; }
 
+nav label {
+  margin-right: 10px; }
+
 nav button {
   padding: 10px 40px;
   border: none;
@@ -201,6 +207,9 @@ nav button {
   color: #F5F3EE; }
   nav button:hover {
     background-color: #7D1935; }
+
+#search {
+  padding: 10px; }
 
 nav form {
   color: #F5F3EE; }
@@ -237,7 +246,11 @@ nav form {
 
 .moreInfoContainer {
   background: #F5F3EE;
-  padding: 20px; }
+  padding: 20px;
+  padding-top: 10px;
+  min-width: 400px;
+  box-shadow: 2px 2px 5px #545454;
+  border-radius: 5px; }
 
 .Icon {
   display: flex;

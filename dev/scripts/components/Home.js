@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
 import SearchedGIFs from '../components/SearchedGIFs';
-import TopGIFs from '../components/TopGIFs';
 import MoreInfo from '../components/MoreInfo';
 
 class Home extends React.Component {
@@ -29,7 +28,6 @@ class Home extends React.Component {
 
         this.fetchNextPage = this.fetchNextPage.bind(this);
         this.fetchPrevPage = this.fetchPrevPage.bind(this);
-        
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
         this.goToTrending = this.goToTrending.bind(this);
         this.goToTop = this.goToTop.bind(this);
@@ -91,8 +89,8 @@ class Home extends React.Component {
       return (
         <div className="wrapper">
             <nav className="navigation">
-                <button onClick = {this.goToTrending}>Trending</button>
-                <button onClick = {this.goToTop}>Top GIFs</button>
+                <button className = "goTo" onClick = {this.goToTrending}>Trending</button>
+                <button className = "goTo" onClick = {this.goToTop}>Top GIFs</button>
                 <div className="searchForm">
                     <SearchForm 
                         handleChange={this.handleChange} 

@@ -20,6 +20,10 @@ nav {
   box-shadow: 2px 2px 5px #888888;
 }
 
+nav label {
+  margin-right: 10px;
+}
+
 nav button {
   padding: 10px 40px;
   border: none;
@@ -28,6 +32,10 @@ nav button {
   &:hover{
     background-color: $primaryBrandColor;
   }
+}
+
+#search {
+  padding: 10px;
 }
 
 nav form {
