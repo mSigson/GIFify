@@ -9,6 +9,31 @@ header .wrapper {
   justify-content: space-between;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  background: $secondaryBrandColor;
+  color: $thirdBrandColor;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+nav button {
+  padding: 10px 40px;
+  border: none;
+  background: none;
+  color: $thirdBrandColor;
+  &:hover{
+    background-color: $primaryBrandColor;
+  }
+}
+
+nav form {
+  color: $thirdBrandColor;
+}
+
 .user {
   display: flex;
   justify-content: space-around;

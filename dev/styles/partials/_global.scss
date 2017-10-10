@@ -17,38 +17,38 @@ html {
     justify-content: center;
 }
 
-.searchedGIF{
+.GIF{
     margin: 5px 5px;
 }
 
-.IconContainer {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    width: 55px;
-    bottom: 85%;
-    right: 0px;
-}
-
-.IconContainer .fa {
-    font-size: 26px;
-}
-
-.pageButtons {
-    width: 35%;
+.pageButtonContainer {
     display: flex;
     justify-content: space-around;
-    margin: 0 auto;
-    margin-bottom: 20px;
 }
 
-.pageButtons button {
-    background: none;
-    border: 1px solid $primaryBrandColor;
-    padding: 2px 15px;
+.pageButton {
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
 }
-.pageButtons button i {
+
+.pageButton button {
+    width: 40px;
+    background: $secondaryBrandColor;
+    border: 1px solid white;
+    padding: 2px 10%;
+    display: flex;
+    justify-content: center;
+    &:hover {
+       
+    }
+}
+.pageButton button i {
     font-size: 30px;
-    color: $primaryBrandColor;
+    color: white;
 }
 

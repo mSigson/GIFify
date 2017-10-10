@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import firebase from 'firebase';
 
 class MoreInfo  extends Component {
     constructor(){
@@ -22,6 +23,7 @@ class MoreInfo  extends Component {
                             <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
                         </div>
                     </div>
+                    <button onClick={this.props.likeGIF}>Like</button>
                 </div>
             </section>
         )

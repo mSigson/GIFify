@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
 import SearchedGIFs from '../components/SearchedGIFs';
+import TopGIFs from '../components/TopGIFs';
 import MoreInfo from '../components/MoreInfo';
 
 class Home extends React.Component {
@@ -18,7 +19,8 @@ class Home extends React.Component {
             showTrendingGIFs: true,
             showSearchedGIFs: false,
             showMoreInfo: false,
-            
+            showTopGIFs: false,
+            likedGIFs: []            
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -29,6 +31,11 @@ class Home extends React.Component {
         this.fetchPrevPage = this.fetchPrevPage.bind(this);
         
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
+        this.goToTrending = this.goToTrending.bind(this);
+        this.goToTop = this.goToTop.bind(this);
+    }
+    componentDidMount(){
+        this.goToTrending();
     }
     fetchNextPage() {
         this.setState({
@@ -66,13 +73,33 @@ class Home extends React.Component {
             showMoreInfo: false
          });
     }
+    goToTrending(){
+        this.setState({
+            showTrendingGIFs: true,
+            showSearchedGIFs: false,
+            showTopGIFs: false
+        })
+    }
+    goToTop(){
+        this.setState({
+            showTrendingGIFs: false,
+            showSearchedGIFs: false,
+            showTopGIFs: true
+        })
+    }
     render() {
       return (
         <div className="wrapper">
-            <SearchForm 
-                handleChange={this.handleChange} 
-                handleSubmit={this.handleSubmit} 
-            />
+            <nav className="navigation">
+                <button onClick = {this.goToTrending}>Trending</button>
+                <button onClick = {this.goToTop}>Top GIFs</button>
+                <div className="searchForm">
+                    <SearchForm 
+                        handleChange={this.handleChange} 
+                        handleSubmit={this.handleSubmit} 
+                    />
+                </div>
+            </nav>
             {this.state.showTrendingGIFs ?
                 <TrendingGIFs 
                     rating = {this.state.rating}
