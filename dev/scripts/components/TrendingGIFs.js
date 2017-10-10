@@ -8,7 +8,7 @@ import { trendingAPIcall } from '../utils/http';
 class TrendingGIFs extends Component {
     constructor(){
         super();
-        this.setState = ({
+        this.state = ({
             GIFs: []
         });
     }
