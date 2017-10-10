@@ -65,7 +65,8 @@ router.route("/RankedGif/:gif_id")
         if (err) {
             return utils.handleErrors(err, res);
         }
-        Object.assign(doc, req.body, {score: doc.score + 1});
+        
+        const updateScore = Object.assign(doc, req.body, {score: doc.score + 1});
         
         doc.save((err, savedDoc) => {
             if (err) {
