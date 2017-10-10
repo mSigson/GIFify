@@ -9,18 +9,22 @@ class TrendingGIFs extends Component {
     constructor(){
         super();
         this.state = ({
-            GIFs: []
+            GIFs: [],
+            paginate:0
         });
+
+        this.fetchNextPage = this.fetchNextPage.bind(this);
+        this.fetchPrevPage = this.fetchPrevPage.bind(this);
     }
     componentDidMount() {
         this.fetchData();
     }
     fetchData() {
-        const { rating, paginate, limit } = this.props;
+        const { rating, limit } = this.props;
         // set statue of loading to true
 
         let  GIFsArray = [];
-        trendingAPIcall(rating, paginate, limit)
+        trendingAPIcall(rating, this.state.paginate, limit)
         .then(json => {
             json.data.map((item, i) => {
                 GIFsArray.push(item)
@@ -31,6 +35,16 @@ class TrendingGIFs extends Component {
             });
         });
     }
+    fetchNextPage() {
+        this.setState({
+          paginate: this.state.paginate + this.props.limit
+        }, () => this.fetchData());
+    }
+    fetchPrevPage() {
+        this.setState({
+          paginate: this.state.paginate - this.props.limit
+        }, () => this.fetchData());
+    }
     render(){
         return (
             <section className="trending">
@@ -39,19 +53,22 @@ class TrendingGIFs extends Component {
                         {this.props.paginate !== 0 ?  
                             <div className="pageButton">
                                 <label htmlFor="prevPage">Prev Page</label>
-                                <button className = "prevPage" name = "prevPage" onClick={this.props.fetchPrevPage}>
+                                <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
                                     <i className="fa fa-angle-left" aria-hidden="true"></i>
                                 </button>  
                             </div>
                         : null}
                         {this.state.GIFs.length === 10 ?  
                             <div className = "pageButton">
-                                <button className = "nextPage" name = "nextPage" onClick={this.props.fetchNextPage}>
+                                <button className = "nextPage" name = "nextPage" onClick={this.fetchNextPage}>
                                     <i className="fa fa-angle-right" aria-hidden="true"></i>
                                 </button> 
                                 <label htmlFor="nextPage">Next Page</label>
                             </div>
                         : null}
+                    </div>
+                    <div className="APIcallType">
+                        <p className="APIcallType">Trending</p>
                     </div>
                     <DisplayGIFs
                         GIFs={this.state.GIFs}

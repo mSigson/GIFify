@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import firebase from 'firebase';
 
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
@@ -25,25 +26,15 @@ class Home extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-        this.fetchNextPage = this.fetchNextPage.bind(this);
-        this.fetchPrevPage = this.fetchPrevPage.bind(this);
-        this.hideMoreInfo = this.hideMoreInfo.bind(this);
+    
         this.goToTrending = this.goToTrending.bind(this);
         this.goToTop = this.goToTop.bind(this);
+        
+        this.hideMoreInfo = this.hideMoreInfo.bind(this);
+        // this.likeGIF = this.likeGIF.bind(this);
     }
     componentDidMount(){
         this.goToTrending();
-    }
-    fetchNextPage() {
-        this.setState({
-          paginate: this.state.paginate + this.state.limit
-        }, () => this.fetchData());
-    }
-    fetchPrevPage() {
-        this.setState({
-          paginate: this.state.paginate - this.state.limit
-        }, () => this.fetchData());
     }
     handleChange(event) {
 		this.setState({
@@ -85,6 +76,16 @@ class Home extends React.Component {
             showTopGIFs: true
         })
     }
+    // thought process to push selected gif to firebase then map firebase database in TopGIFs.js 
+    // likeGIF(){
+    //     const DbRef = firebase.database().ref('/likedShows');
+	// 	const newGIF = {
+    //         url: this.state.chosenGifSrc,
+    //         embed_url: this.state.chosenGifEmbedUrl,
+    //         giphyUrl: this.state.chosenGifGiphyUrl
+	// 	}
+	// 	DbRef.push(newGIF);
+    // }
     render() {
       return (
         <div className="wrapper">
@@ -102,9 +103,6 @@ class Home extends React.Component {
                 <TrendingGIFs 
                     rating = {this.state.rating}
                     limit = {this.state.limit}
-                    paginate = {this.state.paginate}
-                    fetchPrevPage = {this.fetchPrevPage}
-                    fetchNextPage = {this.fetchNextPage}
                     handleClick = {this.handleClick}
                 />
             : null}
@@ -113,9 +111,6 @@ class Home extends React.Component {
                     keywords = {this.state.keywords}
                     rating = {this.state.rating}
                     limit = {this.state.limit}
-                    paginate = {this.state.paginate}
-                    fetchPrevPage = {this.fetchPrevPage}
-                    fetchNextPage = {this.fetchNextPage}
                     handleClick = {this.handleClick}
                 />
             : null}
@@ -125,6 +120,7 @@ class Home extends React.Component {
                     chosenGifGiphyUrl={this.state.chosenGifGiphyUrl}
                     chosenGifEmbedUrl={this.state.chosenGifEmbedUrl}
                     hideMoreInfo={this.hideMoreInfo}
+                    likeGIF={this.likeGIF}
                 /> 
             : null}
         </div>

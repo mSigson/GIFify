@@ -33,6 +33,7 @@
     "express": "^4.16.1",
     "firebase": "^4.5.0",
     "mongoose": "^4.12.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "react-loading": "^0.1.4"
   }
 }

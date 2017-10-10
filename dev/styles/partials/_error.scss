@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    background: $thirdBrandColor;
+    border: 2px solid $primaryBrandColor; 
 }
 
 .ErrorMessage {
