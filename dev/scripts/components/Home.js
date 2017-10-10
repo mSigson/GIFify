@@ -53,12 +53,10 @@ class Home extends React.Component {
       return (
         <div className="wrapper">
             <SearchForm 
-            handleChange={this.handleChange} 
-			handleSubmit={this.handleSubmit} 
-			keywords={this.state.keywords}
+                handleChange={this.handleChange} 
+                handleSubmit={this.handleSubmit} 
             />
             <TrendingGIFs 
-                keywords = {this.state.keywords}
                 rating = {this.state.rating}
                 limit = {this.state.limit}
                 paginate = {this.state.paginate}
@@ -71,6 +69,8 @@ class Home extends React.Component {
                 rating = {this.state.rating}
                 limit = {this.state.limit}
                 paginate = {this.state.paginate}
+                fetchPrevPage = {this.fetchPrevPage}
+                fetchNextPage = {this.fetchNextPage}
                 handleClick = {this.handleClick}
             />
             {this.state.showMoreInfo ? 
@@ -85,11 +85,5 @@ class Home extends React.Component {
       )
     }
 }
-
-Home.contextTypes = {
-    router: React.PropTypes.shape({
-      history: React.PropTypes.object.isRequired,
-    }),
-  };
 
 export default Home;

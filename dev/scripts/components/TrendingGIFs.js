@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import DisplayGIFs from '../components/DisplayGIFs';
 import MoreInfo from '../components/MoreInfo';
 
+import { trendingAPIcall } from '../utils/http';
+
 class TrendingGIFs extends Component {
     constructor(){
         super();
@@ -47,7 +49,7 @@ class TrendingGIFs extends Component {
                     : null}
                 </div>
                 <DisplayGIFs
-                    GIFs={this.props.GIFs}
+                    GIFs={this.state.GIFs}
                     handleClick = {this.handleClick}
                 />
             </section>

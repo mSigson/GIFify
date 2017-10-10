@@ -4,8 +4,6 @@ import {
 	BrowserRouter as Router, 
 	Route, Link, NavLink, Redirect, BrowserHistory } from 'react-router-dom';
 import Home from '../scripts/components/Home';
-import SearchGIFs from '../scripts/components/SearchGIFs';
-import SavedGIFs from '../scripts/components/SavedGIFs';
 import firebase, { auth, provider } from '../scripts/components/firebase';
 
 
@@ -71,8 +69,7 @@ class App extends React.Component {
                 </div>
               </div>
             </header>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/savedgifs" component={SavedGIFs} />
+            <Home />
           </div>
         </Router>
       )
