@@ -17,7 +17,6 @@ class TrendingGIFs extends Component {
     }
     fetchData() {
         const { rating, paginate, limit } = this.props;
-        console.log('hello')
         // set statue of loading to true
 
         let  GIFsArray = [];
@@ -50,7 +49,7 @@ class TrendingGIFs extends Component {
                 </div>
                 <DisplayGIFs
                     GIFs={this.state.GIFs}
-                    handleClick = {this.handleClick}
+                    handleClick = {this.props.handleClick}
                 />
             </section>
         )
