@@ -2,22 +2,55 @@ import React, {Component} from 'react';
 import firebase from 'firebase';
 // import StarRatings from 'react-star-ratings';
 
+import Liked from '../components/Liked';
+
 class MoreInfo  extends Component {
     constructor(){
         super();
         this.state ={
-            chosenGif: [],
+            firebaseGIFs: [],
             // starCount: 3.5,
-            liked: false
+            liked: false,
+            canAddToDB: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.checkIfGIFinDB = this.checkIfGIFinDB.bind(this);
+        this.addToDatabase = this.addToDatabase.bind(this);
+    }
+    componentDidMount() {
+        const dbRef = firebase.database().ref('/topGIFs');
+        dbRef.on('value', (snapshot) => {
+			const newGIFsArray = [];
+			const firebaseItems = snapshot.val();
+			for(let key in firebaseItems) {
+				const firebaseItem = firebaseItems[key];
+				firebaseItem.id = key;
+				newGIFsArray.push(firebaseItem);
+			}
+			this.setState({	
+                firebaseGIFs : newGIFsArray
+			});	
+        });
     }
     handleSubmit(event){
-        console.log('hello');
         event.preventDefault();
+        this.checkIfGIFinDB();
+    }
+    checkIfGIFinDB(){
+        const chosenGIF = this.props.chosenGifEmbedUrl
+        const dbGIF = this.state.firebaseGIFs
 
-		const dbRef = firebase.database().ref('/topGIFs');
+        for (let i = 0; i < dbGIF.length; i++) {
+            if (chosenGIF === dbGIF[i].embed_url ){
+                console.log('it exists');
+            } else {
+                this.addToDatabase();
+            }
+        }
+    }
+    addToDatabase(){
+        const dbRef = firebase.database().ref('/topGIFs');
 		const newGIF = {
             url: this.props.chosenGifGiphyUrl,
             images: {
@@ -25,10 +58,12 @@ class MoreInfo  extends Component {
                     url: this.props.chosenGifSrc
                 }
             },
-            embed_url: this.props.chosenGifEmbedUrl,
+            embed_url: this.props.chosenGifEmbedUrl
             // rating: this.state.rating
-		}
-		dbRef.push(newGIF);
+            }
+        dbRef.push(newGIF);
+            
+
     }
 
     // react-star-ratings
@@ -52,11 +87,9 @@ class MoreInfo  extends Component {
                             <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
                         </div>
                     </div>
-                    {this.state.liked ? 
+                    
                         <button onClick={this.handleSubmit}>Like</button>
-                    : 
-                        <ThankYouForLiking />
-                    }
+
                     {/* <StarRatings
                         rating={rating}
                         isSelectable={true}
