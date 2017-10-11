@@ -146,6 +146,12 @@ html {
     .wrapper {
       width: 98%; } }
 
+img {
+  max-width: 100%; }
+
+button:focus {
+  outline: 0; }
+
 .results {
   display: flex;
   flex-wrap: wrap;
@@ -207,7 +213,8 @@ html {
 
 header {
   background: #7D1935;
-  color: #F5F3EE; }
+  color: #F5F3EE;
+  padding: 0 10px; }
 
 header .wrapper {
   display: flex;
@@ -299,6 +306,9 @@ nav form {
 
 .info {
   text-align: center; }
+
+.rated {
+  background: red; }
 
 .error {
   display: flex;

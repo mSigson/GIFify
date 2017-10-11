@@ -8,6 +8,7 @@ var config = {
   storageBucket: "gifigy-1eaf0.appspot.com",
   messagingSenderId: "622835275739"
 };
+
 firebase.initializeApp(config);
 
   export default firebase;

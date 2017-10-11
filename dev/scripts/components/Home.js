@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
 import SearchedGIFs from '../components/SearchedGIFs';
+import TopGIFs from '../components/TopGIFs';
 import MoreInfo from '../components/MoreInfo';
 
 class Home extends React.Component {
@@ -31,7 +32,6 @@ class Home extends React.Component {
         this.goToTop = this.goToTop.bind(this);
         
         this.hideMoreInfo = this.hideMoreInfo.bind(this);
-        // this.likeGIF = this.likeGIF.bind(this);
     }
     componentDidMount(){
         this.goToTrending();
@@ -54,6 +54,7 @@ class Home extends React.Component {
         event.preventDefault();
         this.setState({
             showTrendingGIFs: false,
+            showTopGIFs: false,
             showSearchedGIFs: true
         });
     }
@@ -76,16 +77,6 @@ class Home extends React.Component {
             showTopGIFs: true
         })
     }
-    // thought process to push selected gif to firebase then map firebase database in TopGIFs.js 
-    // likeGIF(){
-    //     const DbRef = firebase.database().ref('/likedShows');
-	// 	const newGIF = {
-    //         url: this.state.chosenGifSrc,
-    //         embed_url: this.state.chosenGifEmbedUrl,
-    //         giphyUrl: this.state.chosenGifGiphyUrl
-	// 	}
-	// 	DbRef.push(newGIF);
-    // }
     render() {
       return (
         <div className="wrapper">
@@ -111,6 +102,11 @@ class Home extends React.Component {
                     keywords = {this.state.keywords}
                     rating = {this.state.rating}
                     limit = {this.state.limit}
+                    handleClick = {this.handleClick}
+                />
+            : null}
+            {this.state.showTopGIFs ? 
+                <TopGIFs 
                     handleClick = {this.handleClick}
                 />
             : null}

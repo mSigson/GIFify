@@ -35,7 +35,6 @@ class SearchedGIFs extends React.Component {
         this.setState({
             loading: true
         });
-        // set statue of loading to true
 
         let  GIFsArray = [];
         searchAPIcall(keywords, rating, this.state.paginate, limit)
@@ -46,7 +45,6 @@ class SearchedGIFs extends React.Component {
             this.setState({ 
                 GIFs: GIFsArray,
                 loading: false
-                // change state of loading to false 
             });
             setTimeout(this.showError(), 3000);     
         });
