@@ -82,13 +82,13 @@ class Home extends React.Component {
         <div className="wrapper">
             <nav className="navigation">
                 <button className = "goTo" onClick = {this.goToTrending}>Trending</button>
-                <button className = "goTo" onClick = {this.goToTop}>Top GIFs</button>
                 <div className="searchForm">
                     <SearchForm 
                         handleChange={this.handleChange} 
                         handleSubmit={this.handleSubmit} 
                     />
                 </div>
+                <button className = "goTo" onClick = {this.goToTop}>Top GIFs</button>
             </nav>
             {this.state.showTrendingGIFs ?
                 <TrendingGIFs 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import DisplayGIFs from '../components/DisplayGIFs';
 import MoreInfo from '../components/MoreInfo';
+import Loader from '../components/Loader';
 
 import { trendingAPIcall } from '../utils/http';
 
@@ -10,7 +11,8 @@ class TrendingGIFs extends Component {
         super();
         this.state = ({
             GIFs: [],
-            paginate: 0
+            paginate: 0,
+            page: 1
         });
 
         this.fetchNextPage = this.fetchNextPage.bind(this);
@@ -31,33 +33,38 @@ class TrendingGIFs extends Component {
         })
             this.setState({ 
                 GIFs: GIFsArray
-                // change state of loading to false 
             });
+            setTimeout(() => {this.setState({loading: false})}, 1000);   
         });
     }
     fetchNextPage() {
         this.setState({
-          paginate: this.state.paginate + this.props.limit
+          paginate: this.state.paginate + this.props.limit,
+          page: this.state.page + 1
         }, () => this.fetchData());
     }
     fetchPrevPage() {
-        this.setState({
-          paginate: this.state.paginate - this.props.limit
-        }, () => this.fetchData());
+        if(this.state.page > 1){
+            this.setState({
+              paginate: this.state.paginate - this.props.limit,
+              page: this.state.page - 1
+            }, () => this.fetchData());
+        }
     }
     render(){
         return (
             <section className="trending">
                 <div className="wrapper">
-                    <div className="pageButtonContainer">
-                        {this.state.paginate !== 0 || this.state.GIFs.length !== 0 ?  
-                            <div className="pageButton">
-                                <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
-                                    <i className="fa fa-angle-left" aria-hidden="true"></i>
-                                </button>  
-                                <label htmlFor="prevPage">Prev Page</label>
-                            </div>
-                        : null}
+                    <div className="pageButtonContainer"> 
+                        <div className="pageButton">
+                            <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
+                                <i className="fa fa-angle-left" aria-hidden="true"></i>
+                            </button>  
+                            <label htmlFor="prevPage">Prev Page</label>
+                        </div>
+                        <div className="APIcallType">
+                            <h2 className="APIcallType">Trending</h2>
+                        </div>
                         {this.state.GIFs.length === 10 ?  
                             <div className = "pageButton">
                                 <button className = "nextPage align" name = "nextPage" onClick={this.fetchNextPage}>
@@ -67,14 +74,15 @@ class TrendingGIFs extends Component {
                             </div>
                         : null}
                     </div>
-                    <div className="APIcallType">
-                        <p className="APIcallType">Trending</p>
-                    </div>
+                    <p className="page">Page {this.state.page}</p>
                     <div className="results">
-                        <DisplayGIFs
-                            GIFs={this.state.GIFs}
-                            handleClick = {this.props.handleClick}
-                        />
+                        {this.state.loading ? 
+                            <Loader />
+                        :   <DisplayGIFs
+                                GIFs={this.state.GIFs}
+                                handleClick = {this.props.handleClick}
+                            /> 
+                        }
                     </div>
                 </div>
             </section>

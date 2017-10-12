@@ -30,20 +30,22 @@ class TopGIFs extends React.Component {
     }
     render(){
         return (
-            <div>
-                <div className="APIcallType">
-                        <p className="APIcallType">Top</p>
+            <section className = "topGIFs">
+                <div className="wrapper">
+                    <div className="APIcallType">
+                            <h2 className="APIcallType">Top GIFs</h2>
+                        </div>
+                    <div className="results">
+                        {this.state.loading ? 
+                            <Loader />
+                        :   <DisplayGIFs
+                                GIFs={this.state.GIFs}
+                                handleClick = {this.props.handleClick}
+                            /> 
+                        }
                     </div>
-                <div className="results">
-                    {this.state.loading ? 
-                        <Loader />
-                    :   <DisplayGIFs
-                            GIFs={this.state.GIFs}
-                            handleClick = {this.props.handleClick}
-                        /> 
-                    }
                 </div>
-            </div>
+            </section>
         )
     }
 }

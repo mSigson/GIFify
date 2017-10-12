@@ -6,7 +6,7 @@ const utils = require('../dev/scripts/utils');
 router.route('/')
 .get((req, res) => {
     res.send({
-        message: "You made it to the API" 
+        message: "You made it to the Top ranked API" 
     });
 }) 
 .post((req, res) => {

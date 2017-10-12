@@ -13,6 +13,7 @@ class SearchedGIFs extends React.Component {
         this.state = {
             GIFs: [],
             paginate: 0,
+            page: 1,
             loading: true,
             showError: false
         };
@@ -43,54 +44,57 @@ class SearchedGIFs extends React.Component {
                 GIFsArray.push(item)
         })
             this.setState({ 
-                GIFs: GIFsArray,
-                loading: false
+                GIFs: GIFsArray
             });
-            setTimeout(this.showError(), 3000);     
+            setTimeout(() => {this.setState({loading: false})}, 1000);   
         });
     }
     fetchNextPage() {
         this.setState({
-          paginate: this.state.paginate + this.props.limit
+          paginate: this.state.paginate + this.props.limit,
+          page: this.state.page + 1
         }, () => this.fetchData());
     }
     fetchPrevPage() {
-        this.setState({
-          paginate: this.state.paginate - this.props.limit
-        }, () => this.fetchData());
+        if(this.state.page > 1){
+            this.setState({
+              paginate: this.state.paginate - this.props.limit,
+              page: this.state.page - 1
+            }, () => this.fetchData());
+        }
     }
     showError(){
         if(this.state.GIFs.length === 0){
             this.setState({ 
                 showError: true
-            });
+            });  
         }
+
     }
     render(){
         return (
             <section className="searchedGIFs">
                 <div className="wrapper">
-                        <div className="pageButtonContainer">
-                            {this.state.paginate !== 0 || this.state.GIFs.length !== 0 ?  
-                                <div className="pageButton">
-                                    <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
-                                        <i className="fa fa-angle-left" aria-hidden="true"></i>
-                                    </button>  
-                                    <label htmlFor="prevPage">Prev Page</label>
-                                </div>
-                            : null}
-                            {this.state.GIFs.length === 10 ?  
-                                <div className = "pageButton">
-                                    <button className = "nextPage align" name = "nextPage" onClick={this.fetchNextPage}>
-                                        <i className="fa fa-angle-right" aria-hidden="true"></i>
-                                    </button> 
-                                    <label htmlFor="nextPage">Next Page</label>
-                                </div>
-                            : null}
+                    <div className="pageButtonContainer"> 
+                        <div className="pageButton">
+                            <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
+                                <i className="fa fa-angle-left" aria-hidden="true"></i>
+                            </button>  
+                            <label htmlFor="prevPage">Prev Page</label>
+                        </div>
+                        <div className="APIcallType">
+                            <h2 className="APIcallType">Trending</h2>
+                        </div>
+                        {this.state.GIFs.length === 10 ?  
+                            <div className = "pageButton">
+                                <button className = "nextPage align" name = "nextPage" onClick={this.fetchNextPage}>
+                                    <i className="fa fa-angle-right" aria-hidden="true"></i>
+                                </button> 
+                                <label htmlFor="nextPage">Next Page</label>
+                            </div>
+                        : null}
                     </div>
-                    <div className="APIcallType">
-                        <p className="APIcallType">Searched</p>
-                    </div>
+                    <p className="page">Page {this.state.page}</p>
                     <div className="results">
                         {this.state.loading ? 
                             <Loader />

@@ -19,6 +19,10 @@
     min-width: 400px;
     box-shadow: 2px 2px 5px #545454;
     border-radius: 5px;
+    @include respond-to ('ex-small') {
+        max-width: 100%;
+        min-width: 200px;
+	}
 }
 
 .Icon {
@@ -31,6 +35,9 @@
     position: relative;
     left: 97%;
     font-size: 20px;
+    &:hover{
+        color: $secondaryBrandColor;
+    }
 }
 
 .titleAndIcon h1 {
@@ -67,6 +74,9 @@
 .links input {
     padding: 5px;
     width: 300px;
+    @include respond-to ('ex-small') {
+        max-width: 100%;
+	}
 }
 
 .likeButtonContainer {
@@ -77,10 +87,11 @@
 .likeButton {
     background: $primaryBrandColor;
     border: 1px solid white;
-    padding: 10px 20px;
+    padding: 13px 23px;
     color: white;
     box-shadow: 1px 1px 5px #545454;
     transition: 0.1s ease-in;
+    font-size: 1.1em;
     &:hover{
         background: $secondaryBrandColor;
         border-radius: 15px;

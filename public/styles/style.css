@@ -146,11 +146,26 @@ html {
     .wrapper {
       width: 98%; } }
 
+h1 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  font-size: 3.5em; }
+
+h2 {
+  font-family: 'Cairo', sans-serif; }
+
 img {
   max-width: 100%; }
 
 button:focus {
   outline: 0; }
+
+.trending, .searchedGIFs, .topGIFs {
+  min-height: 53vh; }
+
+nav input {
+  padding: 2px 4px; }
 
 .results {
   background: #F5F3EE;
@@ -169,7 +184,7 @@ button:focus {
 .pageButtonContainer {
   display: flex;
   justify-content: space-around;
-  margin-top: 40px; }
+  margin-top: 30px; }
 
 .pageButton {
   width: 120px;
@@ -224,18 +239,25 @@ button:focus {
     transform: rotate(360deg); } }
 
 .APIcallType {
-  margin-top: 0; }
+  text-align: center; }
+
+.APIcallType h2 {
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 35px; }
+
+.page {
+  margin-top: -25px;
+  margin-bottom: 20px; }
+
+.topGIFs .APIcallType {
+  margin: 20px 0; }
 
 header {
   background: #7D1935;
   color: #F5F3EE;
   padding: 0 10px;
   margin-bottom: 25px; }
-
-header .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
 
 nav {
   display: flex;
@@ -308,6 +330,10 @@ nav form input:focus label {
   min-width: 400px;
   box-shadow: 2px 2px 5px #545454;
   border-radius: 5px; }
+  @media (max-width: 570px) {
+    .moreInfoContainer {
+      max-width: 100%;
+      min-width: 200px; } }
 
 .Icon {
   display: flex;
@@ -318,6 +344,8 @@ nav form input:focus label {
   position: relative;
   left: 97%;
   font-size: 20px; }
+  .Icon i:hover {
+    color: #4A96AD; }
 
 .titleAndIcon h1 {
   margin: 0; }
@@ -346,6 +374,9 @@ nav form input:focus label {
 .links input {
   padding: 5px;
   width: 300px; }
+  @media (max-width: 570px) {
+    .links input {
+      max-width: 100%; } }
 
 .likeButtonContainer {
   display: flex;
@@ -354,10 +385,11 @@ nav form input:focus label {
 .likeButton {
   background: #7D1935;
   border: 1px solid white;
-  padding: 10px 20px;
+  padding: 13px 23px;
   color: white;
   box-shadow: 1px 1px 5px #545454;
-  transition: 0.1s ease-in; }
+  transition: 0.1s ease-in;
+  font-size: 1.1em; }
   .likeButton:hover {
     background: #4A96AD;
     border-radius: 15px; }
@@ -380,3 +412,56 @@ footer {
   text-align: center;
   padding: 20px 0;
   margin-top: 50px; }
+
+svg {
+  width: 50px;
+  display: block;
+  margin: 0 auto; }
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0; }
+  .path.circle {
+    -webkit-animation: dash .9s ease-in-out;
+    animation: dash .9s ease-in-out; }
+  .path.line {
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards; }
+  .path.check {
+    stroke-dashoffset: -100;
+    -webkit-animation: dash-check .9s .35s ease-in-out forwards;
+    animation: dash-check .9s .35s ease-in-out forwards; }
+
+p {
+  text-align: center;
+  margin: 20px 0 60px;
+  font-size: 1.25em; }
+  p.success {
+    color: #73AF55; }
+  p.error {
+    color: #D06079; }
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100; }
+  100% {
+    stroke-dashoffset: 900; } }
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100; }
+  100% {
+    stroke-dashoffset: 900; } }

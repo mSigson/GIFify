@@ -5,12 +5,6 @@ header {
   margin-bottom: 25px;
 }
 
-header .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 nav {
   display: flex;
   flex-wrap: wrap;
@@ -21,9 +15,6 @@ nav {
   margin-top: 10px;
   margin-bottom: 10px;
   box-shadow: 2px 2px 5px #888888;
-  @include respond-to ('medium') {
-		
-	}
 }
 
 nav label {

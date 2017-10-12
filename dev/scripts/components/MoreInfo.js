@@ -48,7 +48,10 @@ class MoreInfo  extends Component {
 
         console.log('submitted')
         if (this.state.canAddGIF === true) {
-            this.addToDatabase();
+            // this.addToDatabase();
+            this.setState({
+                liked: true
+            });
         } else {
             console.log('no submission');
         }
@@ -67,14 +70,11 @@ class MoreInfo  extends Component {
         //         },
         //         data: JSON.stringify(data),
         //     });
-
-
     }
     checkIfGIFinDB(){
         const chosenGIF = this.props.chosenGifEmbedUrl
         const dbGIF = this.state.firebaseGIFs
         
-
         // attempt to prevent database from uploading same GIF twice 
         // for(let i = 0; i < dbGIF.length; i++) {
         //     if (chosenGIF === dbGIF[i].embed_url){
@@ -139,9 +139,13 @@ class MoreInfo  extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="likeButtonContainer">
-                        <button className="likeButton" onClick={this.handleSubmit}>Like</button>
-                    </div>
+                    {this.state.liked ?
+                        <Liked />
+                    :
+                        <div className="likeButtonContainer">
+                            <button className="likeButton" onClick={this.handleSubmit}>Like</button>
+                        </div>
+                    }
                     {/* <StarRatings
                         rating={rating}
                         isSelectable={true}
