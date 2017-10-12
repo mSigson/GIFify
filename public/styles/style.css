@@ -413,6 +413,9 @@ footer {
   padding: 20px 0;
   margin-top: 50px; }
 
+footer p {
+  margin: 0; }
+
 svg {
   width: 50px;
   display: block;

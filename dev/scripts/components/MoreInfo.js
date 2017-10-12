@@ -46,19 +46,15 @@ class MoreInfo  extends Component {
     handleSubmit(event){
         event.preventDefault();
 
-        console.log('submitted')
-        if (this.state.canAddGIF === true) {
-            // this.addToDatabase();
+        // console.log('submitted')
+        // if (this.state.canAddGIF === true) {
+            this.addToDatabase();
             this.setState({
                 liked: true
             });
-        } else {
-            console.log('no submission');
-        }
-
-        this.setState({
-            liked: true
-        })
+        // } else {
+        //     console.log('no submission');
+        // }
 
         //  attempted PUT request to API
         //  $.ajax({
