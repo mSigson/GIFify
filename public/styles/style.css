@@ -229,7 +229,8 @@ button:focus {
 header {
   background: #7D1935;
   color: #F5F3EE;
-  padding: 0 10px; }
+  padding: 0 10px;
+  margin-bottom: 25px; }
 
 header .wrapper {
   display: flex;
@@ -328,8 +329,27 @@ nav form input:focus label {
 .info {
   text-align: center; }
 
-.rated {
-  background: red; }
+.info a {
+  color: #4A96AD;
+  text-decoration: none;
+  padding: 2px 3px; }
+  .info a:hover {
+    color: #F5F3EE;
+    background: #4A96AD; }
+
+.links {
+  margin-bottom: 20px; }
+
+.links p {
+  margin: 0; }
+
+.links input {
+  padding: 5px;
+  width: 300px; }
+
+.likeButtonContainer {
+  display: flex;
+  justify-content: center; }
 
 .likeButton {
   background: #7D1935;
@@ -353,3 +373,10 @@ nav form input:focus label {
   width: 60%;
   text-align: center;
   padding: 50px 0px; }
+
+footer {
+  background: #7D1935;
+  color: #F5F3EE;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px; }

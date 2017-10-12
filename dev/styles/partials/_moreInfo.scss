@@ -46,8 +46,32 @@
     text-align: center;
 }
 
-.rated {
-    background: red;
+.info a {
+    color: $secondaryBrandColor;
+    text-decoration: none;
+    padding: 2px 3px;
+    &:hover {
+        color: $thirdBrandColor;
+        background: $secondaryBrandColor;
+    }
+}
+
+.links {
+    margin-bottom: 20px;
+}
+
+.links p {
+    margin: 0;
+}
+
+.links input {
+    padding: 5px;
+    width: 300px;
+}
+
+.likeButtonContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .likeButton {

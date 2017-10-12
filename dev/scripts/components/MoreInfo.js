@@ -129,9 +129,19 @@ class MoreInfo  extends Component {
                         </div>
                         <div className="info">
                             <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
+                            <div className="links">
+                                <p>Send to a friend! Copy the link below:</p>
+                                <input defaultValue={this.props.chosenGifSrc} />
+                            </div>
+                            <div className="links">
+                                <p>Embed in your own website! Copy the link below: </p>
+                                <input defaultValue={this.props.chosenGifEmbedUrl} />
+                            </div>
                         </div>
                     </div>
-                    <button className="likeButton" onClick={this.handleSubmit}>Like</button>
+                    <div className="likeButtonContainer">
+                        <button className="likeButton" onClick={this.handleSubmit}>Like</button>
+                    </div>
                     {/* <StarRatings
                         rating={rating}
                         isSelectable={true}

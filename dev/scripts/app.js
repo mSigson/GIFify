@@ -19,6 +19,11 @@ class App extends React.Component {
               </div>
             </header>
             <Home />
+            <footer>
+              <div className = "copyright">
+                  <p>Developed by Maren Sigson</p>
+              </div>
+            </footer>
           </div>
       )
     }
