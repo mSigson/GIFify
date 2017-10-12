@@ -25,15 +25,19 @@ button {
 }
 
 .results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     background: $thirdBrandColor;
     border: 2px solid $primaryBrandColor;
-    padding: 20px 0px;
+    padding: 20px 20px;
 }
 
-.GIF{
+.GIFsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.GIF {
     margin: 5px 5px;
 }
 
@@ -46,11 +50,25 @@ button {
 .pageButton {
     width: 120px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     margin: 0 auto;
     margin-bottom: 20px;
 
+}
+
+
+.pageButton:nth-of-type(1){
+    align-items: flex-end;
+}
+
+.align {
+    align-items: flex-start;
+}
+
+.pageButton:nth-of-type(2){
+    align-items: flex-start;
 }
 
 .pageButton button {
@@ -60,9 +78,11 @@ button {
     padding: 2px 10%;
     display: flex;
     justify-content: center;
+    transition: 0.1s ease-in;
     &:hover {
-       background: $primaryBrandColor;
-       border: 1px solid $secondaryBrandColor;
+        border-radius: 15px;
+        background: $primaryBrandColor;
+        border: 1px solid white;
     } 
 }
 .pageButton button i {

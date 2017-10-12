@@ -35,7 +35,7 @@ nav button {
   background: none;
   color: $thirdBrandColor;
   &:hover{
-    background-color: $primaryBrandColor;
+    color: $primaryBrandColor;
   }
 }
 
@@ -45,6 +45,13 @@ nav button {
 
 nav form {
   color: $thirdBrandColor;
+  &:focus + label {
+    color: $primaryBrandColor;
+  }
+}
+
+nav form input:focus label {
+  color: $primaryBrandColor;
 }
 
 .user {

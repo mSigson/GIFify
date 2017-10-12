@@ -10,8 +10,7 @@ import firebase, { auth, provider } from '../scripts/components/firebase';
 class App extends React.Component {   
     render() {
       return (
-        <Router history={BrowserHistory}>
-          <div className="routerWrapper">
+          <div className="parentWrapper">
             <header>
               <div className="wrapper">
                 <div className="title">
@@ -21,7 +20,6 @@ class App extends React.Component {
             </header>
             <Home />
           </div>
-        </Router>
       )
     }
 }

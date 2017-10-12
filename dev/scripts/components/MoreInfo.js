@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-// import StarRatings from 'react-star-ratings';
+// import $ from 'jquery'; 
+
+
+// *star 
+// import StarRatings from 'react-star-ratings'; ==> had 'Error: Couldn't find preset "stage-0" relative to directory' errors preventing use but this is the logic behind if it had worked to store the rating them push that into the database
 
 import Liked from '../components/Liked';
 
@@ -9,16 +13,16 @@ class MoreInfo  extends Component {
         super();
         this.state ={
             firebaseGIFs: [],
+            // *star 
             // starCount: 3.5,
-            liked: false,
-            canAddToDB: false,
+            liked: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.checkIfGIFinDB = this.checkIfGIFinDB.bind(this);
         this.addToDatabase = this.addToDatabase.bind(this);
     }
-    componentDidMount() {
+    componentWillMount() {
         const dbRef = firebase.database().ref('/topGIFs');
         dbRef.on('value', (snapshot) => {
 			const newGIFsArray = [];
@@ -29,25 +33,60 @@ class MoreInfo  extends Component {
 				newGIFsArray.push(firebaseItem);
 			}
 			this.setState({	
-                firebaseGIFs : newGIFsArray
-			});	
+                firebaseGIFs : newGIFsArray,
+                canAddGIF: false,
+                liked: false
+            });	
         });
+        
+    }
+    componentDidMount(){
+        this.checkIfGIFinDB();
     }
     handleSubmit(event){
         event.preventDefault();
-        this.checkIfGIFinDB();
+
+        console.log('submitted')
+        if (this.state.canAddGIF === true) {
+            this.addToDatabase();
+        } else {
+            console.log('no submission');
+        }
+
+        this.setState({
+            liked: true
+        })
+
+        //  attempted PUT request to API
+        //  $.ajax({
+        //         url: '/api/rankedgifs',
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Accept': 'application/json'
+        //         },
+        //         data: JSON.stringify(data),
+        //     });
+
+
     }
     checkIfGIFinDB(){
         const chosenGIF = this.props.chosenGifEmbedUrl
         const dbGIF = this.state.firebaseGIFs
+        
 
-        for (let i = 0; i < dbGIF.length; i++) {
-            if (chosenGIF === dbGIF[i].embed_url ){
-                console.log('it exists');
-            } else {
-                this.addToDatabase();
-            }
-        }
+        // attempt to prevent database from uploading same GIF twice 
+        // for(let i = 0; i < dbGIF.length; i++) {
+        //     if (chosenGIF === dbGIF[i].embed_url){
+        //         this.setState({
+        //             canAddGIF: false
+        //         });
+        //     } else {
+        //         this.setState({
+        //             canAddGIF: true
+        //         });
+        //     }
+        // }
     }
     addToDatabase(){
         const dbRef = firebase.database().ref('/topGIFs');
@@ -59,19 +98,24 @@ class MoreInfo  extends Component {
                 }
             },
             embed_url: this.props.chosenGifEmbedUrl
+            // *star 
             // rating: this.state.rating
             }
         dbRef.push(newGIF);
-            
-
     }
-
+    // *star 
     // react-star-ratings
     // changeRating( newRating ) {
     //     this.setState({
     //       rating: newRating
     //     });
     //   }
+    componentWillUnmount(){
+        this.setState({
+            canAddGIF: false,
+            liked: false
+        });
+    }
     render(){
         return (
             <section id="moreInfo">
@@ -87,9 +131,7 @@ class MoreInfo  extends Component {
                             <p>Check it out this GIF on <a href={this.props.chosenGifGiphyUrl}>Giphy.com</a></p>
                         </div>
                     </div>
-                    
-                        <button onClick={this.handleSubmit}>Like</button>
-
+                    <button className="likeButton" onClick={this.handleSubmit}>Like</button>
                     {/* <StarRatings
                         rating={rating}
                         isSelectable={true}

@@ -5,7 +5,6 @@ import DisplayGIFs from '../components/DisplayGIFs';
 import Loader from '../components/Loader';
 
 class TopGIFs extends React.Component {
-    
     constructor() {
         super();
         this.state = {
@@ -32,13 +31,18 @@ class TopGIFs extends React.Component {
     render(){
         return (
             <div>
-                {this.state.loading ? 
-                    <Loader />
-                :   <DisplayGIFs
-                        GIFs={this.state.GIFs}
-                        handleClick = {this.props.handleClick}
-                    /> 
-                }
+                <div className="APIcallType">
+                        <p className="APIcallType">Top</p>
+                    </div>
+                <div className="results">
+                    {this.state.loading ? 
+                        <Loader />
+                    :   <DisplayGIFs
+                            GIFs={this.state.GIFs}
+                            handleClick = {this.props.handleClick}
+                        /> 
+                    }
+                </div>
             </div>
         )
     }

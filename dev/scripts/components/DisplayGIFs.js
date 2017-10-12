@@ -3,11 +3,11 @@ import React from 'react';
 class DisplayGIFs extends React.Component {
     render(){
         return (
-            <section className="results">
+            <section className="GIFsContainer">
                     {this.props.GIFs
-                    .sort(function(a,b){
-                        a.rating - b.rating
-                    })
+                    // .sort(function(a,b){
+                    //     a.rating - b.rating
+                    // })
                     .map((item, i) => {
                         return (
                             <div className="GIF" key={item.id} 

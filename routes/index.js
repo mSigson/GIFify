@@ -6,7 +6,7 @@ const utils = require('../dev/scripts/utils');
 router.route('/')
 .get((req, res) => {
     res.send({
-        message: "What's up, dog?" 
+        message: "You made it to the API" 
     });
 }) 
 .post((req, res) => {
