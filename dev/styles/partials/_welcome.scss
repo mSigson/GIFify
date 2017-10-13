@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    margin-top: 40px;
     @include respond-to ('small') {
 		width: 98%;
 	}

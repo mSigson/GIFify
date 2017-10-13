@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 
+import Welcome from '../components/Welcome';
 import SearchForm from '../components/SearchForm';
 import TrendingGIFs from '../components/TrendingGIFs';
 import SearchedGIFs from '../components/SearchedGIFs';
@@ -17,11 +18,11 @@ class Home extends React.Component {
             paginate: 0,
             rating: "g",
             chosenGifSrc: '',
-            showTrendingGIFs: true,
+            showWelcome: true,
+            showTrendingGIFs: false,
             showSearchedGIFs: false,
             showMoreInfo: false,
-            showTopGIFs: false,
-            likedGIFs: []            
+            showTopGIFs: false        
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -55,6 +56,7 @@ class Home extends React.Component {
         this.setState({
             showTrendingGIFs: false,
             showTopGIFs: false,
+            showWelcome: false,
             showSearchedGIFs: true
         });
     }
@@ -67,14 +69,16 @@ class Home extends React.Component {
         this.setState({
             showTrendingGIFs: true,
             showSearchedGIFs: false,
-            showTopGIFs: false
+            showTopGIFs: false,
+            showWelcome: false
         })
     }
     goToTop(){
         this.setState({
             showTrendingGIFs: false,
             showSearchedGIFs: false,
-            showTopGIFs: true
+            showTopGIFs: true,
+            showWelcome: false
         })
     }
     render() {
@@ -90,13 +94,21 @@ class Home extends React.Component {
                 </div>
                 <button className = "goTo" onClick = {this.goToTop}>Top GIFs</button>
             </nav>
+            {this.state.showWelcome ?
+                <Welcome />
+            :    
+                null
+            }
+
             {this.state.showTrendingGIFs ?
                 <TrendingGIFs 
                     rating = {this.state.rating}
                     limit = {this.state.limit}
                     handleClick = {this.handleClick}
                 />
-            : null}
+            : 
+                null
+            }
             {this.state.showSearchedGIFs ? 
                 <SearchedGIFs 
                     keywords = {this.state.keywords}
@@ -104,12 +116,16 @@ class Home extends React.Component {
                     limit = {this.state.limit}
                     handleClick = {this.handleClick}
                 />
-            : null}
+            : 
+                null
+            }
             {this.state.showTopGIFs ? 
                 <TopGIFs 
                     handleClick = {this.handleClick}
                 />
-            : null}
+            : 
+                null
+            }
             {this.state.showMoreInfo ? 
                 <MoreInfo 
                     chosenGifSrc={this.state.chosenGifSrc} 
@@ -118,7 +134,9 @@ class Home extends React.Component {
                     hideMoreInfo={this.hideMoreInfo}
                     likeGIF={this.likeGIF}
                 /> 
-            : null}
+            : 
+                null
+            }
         </div>
       )
     }

@@ -263,7 +263,8 @@ nav input {
   width: 70%;
   display: flex;
   justify-content: center;
-  align-content: center; }
+  align-content: center;
+  margin-top: 40px; }
   @media (max-width: 650px) {
     .welcome .wrapper {
       width: 98%; } }
