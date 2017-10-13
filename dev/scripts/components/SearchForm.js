@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class SearchForm extends React.Component {
     render() {
         return(
-            <section className="searchForm">
+            <section className="searchFormContainer">
                 <form onSubmit={this.props.handleSubmit}>
                     <label htmlFor="keywords">Keyword</label>
                     <input type="text" name="keywords" id="keywords" onChange={this.props.handleChange} />

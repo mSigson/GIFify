@@ -185,6 +185,9 @@ nav input {
   display: flex;
   justify-content: space-around;
   margin-top: 30px; }
+  @media (max-width: 650px) {
+    .pageButtonContainer {
+      margin-bottom: 30px; } }
 
 .pageButton {
   width: 120px;
@@ -243,12 +246,60 @@ nav input {
   margin: 0;
   margin-bottom: 35px; }
 
+@media (max-width: 650px) {
+  .trending .APIcallType h2 {
+    margin: 0 10px;
+    margin-bottom: 35px; } }
+
 .page {
   margin-top: -25px;
   margin-bottom: 20px; }
 
 .topGIFs .APIcallType {
   margin: 20px 0; }
+
+.welcome .wrapper {
+  min-height: 60vh;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-content: center; }
+  @media (max-width: 650px) {
+    .welcome .wrapper {
+      width: 98%; } }
+
+.welcome .results {
+  padding: 0 80px;
+  padding-bottom: 20px;
+  text-align: center;
+  box-shadow: 1px 1px 5px #545454; }
+  @media (max-width: 650px) {
+    .welcome .results {
+      padding: 0 40px;
+      padding-bottom: 20px; } }
+  @media (max-width: 570px) {
+    .welcome .results {
+      padding: 0 20px;
+      padding-bottom: 20px; } }
+
+.results h2, .results h3 {
+  color: #4A96AD; }
+
+.results img {
+  width: 270px; }
+
+.letsGoBtn button {
+  margin-top: 10px;
+  background: #7D1935;
+  border: 1px solid white;
+  padding: 13px 23px;
+  color: white;
+  box-shadow: 1px 1px 5px #545454;
+  transition: 0.1s ease-in;
+  font-size: 1.1em; }
+  .letsGoBtn button:hover {
+    background: #4A96AD;
+    border-radius: 15px; }
 
 header {
   background: #7D1935;

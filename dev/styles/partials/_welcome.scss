@@ -1,0 +1,47 @@
+.welcome .wrapper {
+    min-height: 60vh;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    @include respond-to ('small') {
+		width: 98%;
+	}
+}
+
+.welcome .results {
+    padding: 0 80px;
+    padding-bottom: 20px;
+    text-align: center;
+    box-shadow: 1px 1px 5px #545454;  
+    @include respond-to ('small') {
+        padding: 0 40px;
+        padding-bottom: 20px;
+	} @include respond-to ('ex-small') {
+        padding: 0 20px;
+        padding-bottom: 20px;
+	} 
+}
+
+.results h2, .results h3 {
+    color: $secondaryBrandColor;
+}
+
+.results img {
+    width: 270px;
+}
+
+.letsGoBtn button{
+    margin-top: 10px;
+    background: $primaryBrandColor;
+    border: 1px solid white;
+    padding: 13px 23px;
+    color: white;
+    box-shadow: 1px 1px 5px #545454;
+    transition: 0.1s ease-in;
+    font-size: 1.1em;
+    &:hover{
+        background: $secondaryBrandColor;
+        border-radius: 15px;
+    }
+}
