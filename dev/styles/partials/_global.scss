@@ -36,19 +36,22 @@ button {
 }
 
 .trending, .searchedGIFs, .topGIFs {
-    min-height: 53vh;
+    min-height: 55vh;
 }
 
+// app.js 
 nav input {
     padding: 2px 4px;
 }
 
+// TrendingGIFs.js , SearchedGIFs.js , TopGIFs.js
 .results {
     background: $thirdBrandColor;
     border: 2px solid $primaryBrandColor;
     padding: 20px 20px;
 }
 
+// DisplayGIFs.js 
 .GIFsContainer {
     display: flex;
     flex-wrap: wrap;
@@ -56,16 +59,19 @@ nav input {
     justify-content: center;
 }
 
+// DisplayGIFs.js 
 .GIF {
     margin: 5px 5px;
 }
 
+// TrendingGIFs.js , SearchedGIFs.js
 .pageButtonContainer {
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
 }
 
+// ...
 .pageButton {
     width: 120px;
     display: flex;
@@ -77,18 +83,17 @@ nav input {
 
 }
 
+// ...
 .pageButton:nth-of-type(1){
     align-items: flex-end;
 }
 
-.align {
-    align-items: flex-start;
-}
-
+// ...
 .pageButton:nth-of-type(2){
     align-items: flex-start;
 }
 
+// ...
 .pageButton button {
     width: 40px;
     background: $secondaryBrandColor;
@@ -103,12 +108,14 @@ nav input {
         border: 1px solid white;
     } 
 }
+
+// ...
 .pageButton button i {
     font-size: 30px;
     color: white;
 }
 
-
+// ...
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid $primaryBrandColor; /* Blue */
@@ -119,26 +126,31 @@ nav input {
     margin: 0 auto;
 }
 
+// ...
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+// ...
 .APIcallType {
     text-align: center;
 }
 
+// ...
 .APIcallType h2 {
     font-size: 2em;
     margin: 0;
     margin-bottom: 35px;
 } 
 
+// ...
 .page {
    margin-top: -25px;
    margin-bottom: 20px;
 } 
 
+// TopGIFs.js
 .topGIFs .APIcallType {
     margin: 20px 0;
 }

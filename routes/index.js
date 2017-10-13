@@ -13,18 +13,20 @@ router.route('/')
     res.send("POST REQUEST!");
 })
 
+
+// route for rankedGIFs 
 router.route('/rankedgifs')
 .get((req, res) => {
 
     const results = RankedGif.find();
     const params = req.query;
 
+    // sort documents by score 
     if(params.order_by === 'score'){
         results.sort({
             score: -1
         });
     }
-
     results.exec((err, docs) => {
         if (err) {
             return utils.handleErrors(err, res);
@@ -47,36 +49,6 @@ router.route('/rankedgifs')
             .send(doc);
     });
 
-});
-
-router.route("/RankedGif/:gif_id")
-.get((req, res) => {
-   const id = req.params.pet_id
-   RankedGif.findOne({_id: id}, (err, doc)=> {
-        if (err) {
-            return utils.handleErrors(err, res);
-        }
-        res.status(200)
-        res.send(doc);
-   })
-})
-.put((req, res) => {
-    RankedGif.findById(req.params.gif_id, (err, doc) => {
-        if (err) {
-            return utils.handleErrors(err, res);
-        }
-        
-        const updateScore = Object.assign(doc, req.body, {score: doc.score + 1});
-        
-        doc.save((err, savedDoc) => {
-            if (err) {
-                return utils.handleErrors(err, res);
-            }
-            res
-                .status(201)
-                .send(savedDoc);
-        });
-    });
 });
 
 module.exports = router;

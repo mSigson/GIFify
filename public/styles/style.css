@@ -162,7 +162,7 @@ button:focus {
   outline: 0; }
 
 .trending, .searchedGIFs, .topGIFs {
-  min-height: 53vh; }
+  min-height: 55vh; }
 
 nav input {
   padding: 2px 4px; }
@@ -197,9 +197,6 @@ nav input {
 
 .pageButton:nth-of-type(1) {
   align-items: flex-end; }
-
-.align {
-  align-items: flex-start; }
 
 .pageButton:nth-of-type(2) {
   align-items: flex-start; }
@@ -427,23 +424,10 @@ svg {
   .path.circle {
     -webkit-animation: dash .9s ease-in-out;
     animation: dash .9s ease-in-out; }
-  .path.line {
-    stroke-dashoffset: 1000;
-    -webkit-animation: dash .9s .35s ease-in-out forwards;
-    animation: dash .9s .35s ease-in-out forwards; }
   .path.check {
     stroke-dashoffset: -100;
     -webkit-animation: dash-check .9s .35s ease-in-out forwards;
     animation: dash-check .9s .35s ease-in-out forwards; }
-
-p {
-  text-align: center;
-  margin: 20px 0 60px;
-  font-size: 1.25em; }
-  p.success {
-    color: #73AF55; }
-  p.error {
-    color: #D06079; }
 
 @-webkit-keyframes dash {
   0% {

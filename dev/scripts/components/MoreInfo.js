@@ -46,6 +46,7 @@ class MoreInfo  extends Component {
     handleSubmit(event){
         event.preventDefault();
 
+        // code to check if GIF already exists in firebase databse
         // console.log('submitted')
         // if (this.state.canAddGIF === true) {
             this.addToDatabase();

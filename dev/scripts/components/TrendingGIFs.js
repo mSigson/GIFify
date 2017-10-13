@@ -12,7 +12,8 @@ class TrendingGIFs extends Component {
         this.state = ({
             GIFs: [],
             paginate: 0,
-            page: 1
+            page: 1,
+            loading: true
         });
 
         this.fetchNextPage = this.fetchNextPage.bind(this);
@@ -23,7 +24,10 @@ class TrendingGIFs extends Component {
     }
     fetchData() {
         const { rating, limit } = this.props;
-        // set statue of loading to true
+        
+        this.setState({
+            loading: true
+        });
 
         let  GIFsArray = [];
         trendingAPIcall(rating, this.state.paginate, limit)
@@ -34,7 +38,7 @@ class TrendingGIFs extends Component {
             this.setState({ 
                 GIFs: GIFsArray
             });
-            setTimeout(() => {this.setState({loading: false})}, 1000);   
+            setTimeout(() => {this.setState({loading: false})}, 500);   
         });
     }
     fetchNextPage() {
@@ -72,7 +76,9 @@ class TrendingGIFs extends Component {
                                 </button> 
                                 <label htmlFor="nextPage">Next Page</label>
                             </div>
-                        : null}
+                        : 
+                            null
+                        }
                     </div>
                     <p className="page">Page {this.state.page}</p>
                     <div className="results">

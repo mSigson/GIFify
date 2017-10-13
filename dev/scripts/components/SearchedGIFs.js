@@ -28,11 +28,14 @@ class SearchedGIFs extends React.Component {
     componentWillReceiveProps(newKeywords) {
         if(this.props.keywords !== newKeywords.keywords){
             this.fetchData();
+            this.setState({
+                page: 1
+            });
         }
     } 
     fetchData() {
         const {keywords, rating, limit } = this.props;
-
+        
         this.setState({
             loading: true
         });
@@ -69,21 +72,24 @@ class SearchedGIFs extends React.Component {
                 showError: true
             });  
         }
-
     }
     render(){
         return (
             <section className="searchedGIFs">
                 <div className="wrapper">
                     <div className="pageButtonContainer"> 
-                        <div className="pageButton">
-                            <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
-                                <i className="fa fa-angle-left" aria-hidden="true"></i>
-                            </button>  
-                            <label htmlFor="prevPage">Prev Page</label>
-                        </div>
+                        {this.state.GIFs.length > 0 ?  
+                            <div className="pageButton">
+                                <button className = "prevPage" name = "prevPage" onClick={this.fetchPrevPage}>
+                                    <i className="fa fa-angle-left" aria-hidden="true"></i>
+                                </button>  
+                                <label htmlFor="prevPage">Prev Page</label>
+                            </div>
+                        :
+                            null
+                        }
                         <div className="APIcallType">
-                            <h2 className="APIcallType">Trending</h2>
+                            <h2 className="APIcallType">{this.props.keywords}</h2>
                         </div>
                         {this.state.GIFs.length === 10 ?  
                             <div className = "pageButton">
@@ -92,9 +98,15 @@ class SearchedGIFs extends React.Component {
                                 </button> 
                                 <label htmlFor="nextPage">Next Page</label>
                             </div>
-                        : null}
+                        : 
+                            null
+                        }
                     </div>
-                    <p className="page">Page {this.state.page}</p>
+                    { this.state.GIFs.length > 0?
+                        <p className="page">Page {this.state.page}</p>
+                    :
+                        null
+                    }
                     <div className="results">
                         {this.state.loading ? 
                             <Loader />
@@ -103,7 +115,7 @@ class SearchedGIFs extends React.Component {
                                 handleClick = {this.props.handleClick}
                             /> 
                         }
-                        {this.state.GIFs.length === 0 ? 
+                        {this.state.GIFs.length === 0 && this.state.loading === false ? 
                             <Error />
                         : null }
                     </div>

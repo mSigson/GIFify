@@ -1,3 +1,6 @@
+
+// server for API through MongoDB
+
 const express = require('express');
 
 const app = express();
